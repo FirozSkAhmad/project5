@@ -21,7 +21,7 @@ async function createUser(req, res) {
     //files form form data
     let files = req.files;
 
-    // console.log(files);
+    console.log(files);
 
     const {
       fname,
@@ -63,9 +63,9 @@ async function createUser(req, res) {
       //checking required fields
       if (field === "profileImage") {
         if (
-          files[0].fieldname !== "profileImage" ||
           files === undefined ||
-          files.length === 0
+          files.length === 0 ||
+          files[0].fieldname !== "profileImage"
         ) {
           err.push("required profileImage as key and file as value");
         }
@@ -376,12 +376,10 @@ const userUpdate = async function (req, res) {
           files === undefined ||
           files.length === 0)
       ) {
-        return res
-          .status(400)
-          .send({
-            status: false,
-            message: "required profileImage as key and file as value",
-          });
+        return res.status(400).send({
+          status: false,
+          message: "required profileImage as key and file as value",
+        });
       }
       if (body[field].trim() === "") {
         return res

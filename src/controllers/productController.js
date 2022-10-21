@@ -160,12 +160,10 @@ const createProduct = async function (req, res) {
     }
 
     if (files.length === 0 || files[0].fieldname !== "productImage") {
-      return res
-        .status(400)
-        .send({
-          status: false,
-          message: "required productImage as key and file as value",
-        });
+      return res.status(400).send({
+        status: false,
+        message: "required productImage as key and file as value",
+      });
     }
 
     if (
@@ -434,14 +432,18 @@ async function updateProductByParam(req, res) {
 
     for (field of arr) {
       if (Object.keys(data).includes(field)) {
-        if (
-          field === "productImage" &&
-          (files === undefined || files.length === 0)
-        ) {
-          return res
-            .status(400)
-            .send({ status: false, message: "required productImage file" });
+        if (field === "productImage") {
+          if (
+            files === undefined ||
+            files.length === 0 ||
+            files[0].fieldname !== "profileImage"
+          ) {
+            return res
+              .status(400)
+              .send({ status: false, message: "required productImage file" });
+          }
         }
+
         if (data[field].trim() === "") {
           return res
             .status(400)
@@ -638,4 +640,3 @@ module.exports = {
   updateProductByParam,
   deleteProduct,
 };
-
