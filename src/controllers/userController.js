@@ -372,9 +372,9 @@ const userUpdate = async function (req, res) {
     if (Object.keys(body).includes(field)) {
       if (
         field === "profileImage" &&
-        (files[0].fieldname !== "profileImage" ||
-          files === undefined ||
-          files.length === 0)
+        (files === undefined ||
+          files.length === 0 ||
+          files[0].fieldname !== "profileImage")
       ) {
         return res.status(400).send({
           status: false,

@@ -118,12 +118,12 @@ async function createCart(req, res) {
           cart.items.push(items);
         }
         //If the items lenght is 0, we have push the products with out checking
-        if (cart.items.length === 0) {
-          let items = {};
-          items.productId = productId.trim();
-          items.quantity = 1;
-          cart.items.push(items);
-        }
+        // if (cart.items.length === 0) {
+        //   let items = {};
+        //   items.productId = productId.trim();
+        //   items.quantity = 1;
+        //   cart.items.push(items);
+        // }
 
         //increasing totalPrice and totalItems
         cart.totalPrice += price;
@@ -244,12 +244,10 @@ async function updateCart(req, res) {
       .findOne({ _id: data.cartId.trim(), userId: userId })
       .lean();
     if (!cart) {
-      return res
-        .status(404)
-        .send({
-          status: false,
-          message: "cart not found with given userID and cartId combination",
-        });
+      return res.status(404).send({
+        status: false,
+        message: "cart not found with given userID and cartId combination",
+      });
     }
 
     //Getting all the productIds in a cart to a variable as an array
@@ -314,7 +312,7 @@ async function updateCart(req, res) {
         message: "Success",
         data: updatedCart,
       });
-    }  
+    }
 
     //If removeProduct===0 we have to remove the product from the items
 
