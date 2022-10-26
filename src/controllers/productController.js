@@ -76,28 +76,6 @@ const createProduct = async function (req, res) {
       }
     }
 
-    // const arr = [
-    //   "title",
-    //   "description",
-    //   "price",
-    //   "currencyId",
-    //   "currencyFormat",
-    //   "isFreeShipping",
-    //   "style",
-    //   "availableSizes",
-    //   "installments",
-    // ];
-
-    // for (field of arr) {
-    //   if (Object.keys(data).includes(field)) {
-    //     if (data[field].trim() === "") {
-    //       return res
-    //         .status(400)
-    //         .send({ status: false, message: `required value of the ${field}` });
-    //     }
-    //   }
-    // }
-
     if (!isValidString(description.trim())) {
       return res
         .status(400)
@@ -256,26 +234,6 @@ async function getProduct(req, res) {
           .send({ status: false, message: "size must be in string" });
       }
       let listOfSizes = ["S", "XS", "M", "X", "L", "XXL", "XL"];
-      // if (size.length > 0) {
-      //   let sizes = size.split(",").map((x) => x.trim().toUpperCase());
-      //   for (field of sizes) {
-      //     if (!listOfSizes.includes(field)) {
-      //       return res.status(400).send({
-      //         status: false,
-      //         message: `Sizes must be in ${listOfSizes.join(", ")}`,
-      //       });
-      //     }
-      //   }
-      //   obj.availableSizes = { $in: sizes };
-      // } else {
-      //   if (!listOfSizes.includes(size.trim().toUpperCase())) {
-      //     return res.status(400).send({
-      //       status: false,
-      //       message: `Sizes must be in ${listOfSizes.join(", ")}`,
-      //     });
-      //   }
-      //   obj.availableSizes = { $in: size.trim().toUpperCase() };
-      // }
       let sizes = size.split(",").map((x) => x.trim().toUpperCase());
     for (field of sizes) {
       if (!listOfSizes.includes(field)) {
@@ -463,11 +421,11 @@ async function updateProductByParam(req, res) {
           if (
             files === undefined ||
             files.length === 0 ||
-            files[0].fieldname !== "profileImage"
+            files[0].fieldname !== "productImage"
           ) {
             return res
               .status(400)
-              .send({ status: false, message: "required productImage file" });
+              .send({ status: false, message: "required productImage as key and file as value" });
           }
         }
 

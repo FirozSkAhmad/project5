@@ -21,7 +21,7 @@ async function createUser(req, res) {
     //files form form data
     let files = req.files;
 
-    console.log(files);
+    // console.log(files);
 
     const {
       fname,

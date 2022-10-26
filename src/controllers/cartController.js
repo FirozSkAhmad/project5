@@ -117,13 +117,6 @@ async function createCart(req, res) {
           items.quantity = 1;
           cart.items.push(items);
         }
-        //If the items lenght is 0, we have push the products with out checking
-        // if (cart.items.length === 0) {
-        //   let items = {};
-        //   items.productId = productId.trim();
-        //   items.quantity = 1;
-        //   cart.items.push(items);
-        // }
 
         //increasing totalPrice and totalItems
         cart.totalPrice += price;
